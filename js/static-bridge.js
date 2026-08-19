@@ -21,14 +21,9 @@ if (o.method === 'POST' && p === '/api/public/contact') {
       var subject = (o.json && o.json.subject || '');
       var message = (o.json && o.json.message || '');
       var text = 'Olá! Me chamo ' + name +
-        '.
-Assunto: ' + subject +
-        '
-
-' + message +
-        '
-
-Meu e-mail: ' + email;
+        '.\nAssunto: ' + subject +
+        '\n\n' + message +
+        '\n\nMeu e-mail: ' + email;
       if (whatsapp) window.location.href = 'https://wa.me/' + whatsapp + '?text=' + encodeURIComponent(text);
       return { ok: true };
     }
