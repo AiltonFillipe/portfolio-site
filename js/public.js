@@ -703,8 +703,16 @@
       const nr = qs('#noResults'); if (nr) nr.classList.add('hidden');
     },
     scrollFilters(dir) {
-      const bar = qs('#filterBar'); if (!bar) return;
-      bar.scrollBy({ left: dir * Math.round(bar.clientWidth * 0.75), behavior: 'smooth' });
+      const cats = [{ id: 0, name: 'Todos os projetos' }].concat(state.categories);
+      let idx = cats.findIndex((c) => c.id === state.cat);
+      if (idx === -1) idx = 0;
+      idx = (idx + dir + cats.length) % cats.length;
+      state.cat = cats[idx].id;
+      qsa('.filter-btn').forEach((b) => b.classList.toggle('active', Number(b.dataset.cat) === state.cat));
+      const grid = qs('#projectGrid'); if (grid) grid.innerHTML = renderGrid();
+      const nr = qs('#noResults'); if (nr) nr.classList.add('hidden');
+      const btn = qs('.filter-btn[data-cat="' + state.cat + '"]');
+      if (btn) btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     },
     toggleTheme
   };
