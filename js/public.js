@@ -701,6 +701,7 @@
       qsa('.filter-btn').forEach((b) => b.classList.toggle('active', Number(b.dataset.cat) === 0));
       const grid = qs('#projectGrid'); if (grid) grid.innerHTML = renderGrid();
       const nr = qs('#noResults'); if (nr) nr.classList.add('hidden');
+      observeReveal();
     },
     scrollFilters(dir) {
       const cats = [{ id: 0, name: 'Todos os projetos' }].concat(
@@ -713,6 +714,7 @@
       qsa('.filter-btn').forEach((b) => b.classList.toggle('active', Number(b.dataset.cat) === state.cat));
       const grid = qs('#projectGrid'); if (grid) grid.innerHTML = renderGrid();
       const nr = qs('#noResults'); if (nr) nr.classList.add('hidden');
+      observeReveal();
       const btn = qs('.filter-btn[data-cat="' + state.cat + '"]');
       if (btn) btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     },
