@@ -704,7 +704,9 @@
       observeReveal();
     },
     scrollFilters(dir) {
-      const cats = [{ id: 0, name: 'Todos os projetos' }].concat(state.categories);
+      const cats = [{ id: 0, name: 'Todos os projetos' }].concat(
+        state.categories.filter((c) => state.projects.some((p) => p.category && p.category.id === c.id))
+      );
       let idx = cats.findIndex((c) => c.id === state.cat);
       if (idx === -1) idx = 0;
       idx = (idx + dir + cats.length) % cats.length;
