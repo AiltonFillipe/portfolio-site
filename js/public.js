@@ -215,7 +215,9 @@
   }
 
   function portfolioHTML() {
-    const cats = [{ id: 0, name: 'Todos os projetos' }].concat(state.categories);
+    const cats = [{ id: 0, name: 'Todos os projetos' }].concat(
+      state.categories.filter((c) => state.projects.some((p) => p.category && p.category.id === c.id))
+    );
     return `
     <section class="portfolio" id="portfolio">
       <div class="container">
@@ -224,7 +226,7 @@
             <p class="eyebrow">02 — Portfólio</p>
             <h2 class="section-title">Trabalhos selecionados</h2>
           </div>
-          <p class="section-note">${state.projects.length} projetos · ${state.categories.length} categorias</p>
+          <p class="section-note">${state.projects.length} projetos · ${cats.length - 1} categorias</p>
         </div>
         <div class="filter-scroller reveal">
           <button class="filter-arrow" id="filterPrev" aria-label="Filtros anteriores" onclick="S.pub.scrollFilters(-1)">←</button>
@@ -722,11 +724,8 @@
   };
 
   function updateFilterArrows() {
-    const bar = qs('#filterBar'); if (!bar) return;
-    const canLeft = bar.scrollLeft > 4;
-    const canRight = bar.scrollLeft < bar.scrollWidth - bar.clientWidth - 4;
-    const prev = qs('#filterPrev'); if (prev) prev.classList.toggle('disabled', !canLeft);
-    const next = qs('#filterNext'); if (next) next.classList.toggle('disabled', !canRight);
+    const prev = qs('#filterPrev'); if (prev) prev.classList.remove('disabled');
+    const next = qs('#filterNext'); if (next) next.classList.remove('disabled');
   }
 
   /* ---------- boot ---------- */
