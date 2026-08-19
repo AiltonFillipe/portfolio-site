@@ -666,6 +666,10 @@
       form.reset();
       note.textContent = 'Abrindo o WhatsApp com sua mensagem...';
       note.className = 'form-note ok';
+      setTimeout(() => {
+        note.textContent = '';
+        note.className = 'form-note';
+      }, 4000);
     });
   }
 
