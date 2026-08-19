@@ -13,16 +13,23 @@
     var o = opts || {};
     var p = String(path).split('?')[0];
 
-    if (o.method === 'POST' && p === '/api/public/contact') {
+if (o.method === 'POST' && p === '/api/public/contact') {
       var c = (DATA.settings && DATA.settings.contact) || {};
-      var email = c.email || '';
-      var siteName = (DATA.settings && DATA.settings.site && DATA.settings.site.name) || '';
-      var subj = encodeURIComponent('[' + siteName + '] ' + (o.json && o.json.subject || ''));
-      var body = encodeURIComponent(
-        'Nome: ' + (o.json && o.json.name || '') + '\n' +
-        'E-mail: ' + (o.json && o.json.email || '') + '\n\n' +
-        (o.json && o.json.message || ''));
-      if (email) window.location.href = 'mailto:' + email + '?subject=' + subj + '&body=' + body;
+      var whatsapp = c.whatsapp || '';
+      var name = (o.json && o.json.name || '');
+      var email = (o.json && o.json.email || '');
+      var subject = (o.json && o.json.subject || '');
+      var message = (o.json && o.json.message || '');
+      var text = 'Olá! Me chamo ' + name +
+        '.
+Assunto: ' + subject +
+        '
+
+' + message +
+        '
+
+Meu e-mail: ' + email;
+      if (whatsapp) window.location.href = 'https://wa.me/' + whatsapp + '?text=' + encodeURIComponent(text);
       return { ok: true };
     }
 

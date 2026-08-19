@@ -640,25 +640,32 @@
       });
     });
 
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
       const fd = new FormData(form);
       const note = qs('#formNote');
-      try {
-        await api('/api/public/contact', {
-          method: 'POST',
-          json: {
-            name: fd.get('name'), email: fd.get('email'),
-            subject: fd.get('subject'), message: fd.get('message')
-          }
-        });
-        form.reset();
-        note.textContent = 'Obrigado! Sua mensagem foi enviada. Respondo em até 2 dias úteis.';
-        note.className = 'form-note ok';
-      } catch (err) {
-        note.textContent = err.message;
+      const whatsapp = (data.settings && data.settings.contact && data.settings.contact.whatsapp) || '';
+      if (!whatsapp) {
+        note.textContent = 'Contato por WhatsApp não configurado.';
         note.className = 'form-note err';
+        return;
       }
+      const name = String(fd.get('name') || '').trim();
+      const email = String(fd.get('email') || '').trim();
+      const subject = String(fd.get('subject') || '').trim();
+      const message = String(fd.get('message') || '').trim();
+      const text = 'Olá! Me chamo ' + name +
+        '.\nAssunto: ' + subject +
+        '\n\n' + message +
+        '\n\nMeu e-mail: ' + email;
+      const a = document.createElement('a');
+      a.href = 'https://wa.me/' + whatsapp + '?text=' + encodeURIComponent(text);
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.click();
+      form.reset();
+      note.textContent = 'Abrindo o WhatsApp com sua mensagem...';
+      note.className = 'form-note ok';
     });
   }
 
