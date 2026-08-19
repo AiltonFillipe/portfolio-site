@@ -716,7 +716,7 @@
     try {
       const res = await api('/api/public/boot');
       data = res;
-      state.projects = res.projects;
+      state.projects = res.projects.slice(0, 6);
       state.categories = res.categories;
       state.featured = res.featured;
       applyTheme(res.settings);
