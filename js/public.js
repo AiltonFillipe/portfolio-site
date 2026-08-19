@@ -215,9 +215,7 @@
   }
 
   function portfolioHTML() {
-    const cats = [{ id: 0, name: 'Todos os projetos' }].concat(
-      state.categories.filter((c) => state.projects.some((p) => p.category && p.category.id === c.id))
-    );
+    const cats = [{ id: 0, name: 'Todos os projetos' }].concat(state.categories);
     return `
     <section class="portfolio" id="portfolio">
       <div class="container">
@@ -226,7 +224,7 @@
             <p class="eyebrow">02 — Portfólio</p>
             <h2 class="section-title">Trabalhos selecionados</h2>
           </div>
-          <p class="section-note">${state.projects.length} projetos · ${cats.length - 1} categorias</p>
+          <p class="section-note">${state.projects.length} projetos · ${state.categories.length} categorias</p>
         </div>
         <div class="filter-scroller reveal">
           <button class="filter-arrow" id="filterPrev" aria-label="Filtros anteriores" onclick="S.pub.scrollFilters(-1)">←</button>
@@ -706,16 +704,13 @@
       observeReveal();
     },
     scrollFilters(dir) {
-      const cats = [{ id: 0, name: 'Todos os projetos' }].concat(
-        state.categories.filter((c) => state.projects.some((p) => p.category && p.category.id === c.id))
-      );
+      const cats = [{ id: 0, name: 'Todos os projetos' }].concat(state.categories);
       let idx = cats.findIndex((c) => c.id === state.cat);
       if (idx === -1) idx = 0;
       idx = (idx + dir + cats.length) % cats.length;
       state.cat = cats[idx].id;
       qsa('.filter-btn').forEach((b) => b.classList.toggle('active', Number(b.dataset.cat) === state.cat));
       const grid = qs('#projectGrid'); if (grid) grid.innerHTML = renderGrid();
-      const nr = qs('#noResults'); if (nr) nr.classList.add('hidden');
       observeReveal();
       const btn = qs('.filter-btn[data-cat="' + state.cat + '"]');
       if (btn) btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
