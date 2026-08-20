@@ -653,14 +653,9 @@
         note.className = 'form-note err';
         return;
       }
-      const name = String(fd.get('name') || '').trim();
-      const email = String(fd.get('email') || '').trim();
       const subject = String(fd.get('subject') || '').trim();
       const message = String(fd.get('message') || '').trim();
-      const text = 'Olá! Me chamo ' + name +
-        '.\nAssunto: ' + subject +
-        '\n\n' + message +
-        '\n\nMeu e-mail: ' + email;
+      const text = (subject ? 'Assunto: ' + subject + '\n\n' : '') + message;
       const a = document.createElement('a');
       a.href = 'https://wa.me/' + whatsapp + '?text=' + encodeURIComponent(text);
       a.target = '_blank';

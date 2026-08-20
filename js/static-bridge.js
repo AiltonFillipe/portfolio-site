@@ -16,14 +16,9 @@
 if (o.method === 'POST' && p === '/api/public/contact') {
       var c = (DATA.settings && DATA.settings.contact) || {};
       var whatsapp = c.whatsapp || '';
-      var name = (o.json && o.json.name || '');
-      var email = (o.json && o.json.email || '');
       var subject = (o.json && o.json.subject || '');
       var message = (o.json && o.json.message || '');
-      var text = 'Olá! Me chamo ' + name +
-        '.\nAssunto: ' + subject +
-        '\n\n' + message +
-        '\n\nMeu e-mail: ' + email;
+      var text = (subject ? 'Assunto: ' + subject + '\n\n' : '') + message;
       if (whatsapp) window.location.href = 'https://wa.me/' + whatsapp + '?text=' + encodeURIComponent(text);
       return { ok: true };
     }
