@@ -385,11 +385,11 @@
     </section>`;
   }
 
-  function contactHTML(s, services) {
-    const c = s.contact || {};
+  function contactHTML(d, services) {
+    const c = (d.settings && d.settings.contact) || {};
     return `
     <section class="contact" id="contact">
-      <div class="container contact-grid">
+      <div class="container">
         <div class="contact-info">
           <p class="eyebrow reveal">06 — Contato</p>
           <h2 class="section-title reveal">Vamos trabalhar juntos</h2>
@@ -413,35 +413,9 @@
             </div>` : ''}
           </div>
           <div class="contact-social reveal">
-            ${(s.socials || []).map((so) => '<a class="social-pill" href="' + esc(so.url) + '" target="_blank" rel="noopener">' + esc(so.platform) + '</a>').join('')}
+            ${(d.socials || []).map((so) => '<a class="social-pill" href="' + esc(so.url) + '" target="_blank" rel="noopener">' + esc(so.platform) + '</a>').join('')}
           </div>
         </div>
-        <form class="contact-form reveal" id="contactForm" novalidate>
-          <div class="field-row">
-            <label class="field">
-              <span>Seu nome</span>
-              <input type="text" name="name" maxlength="120" required>
-            </label>
-            <label class="field">
-              <span>E-mail</span>
-              <input type="email" name="email" maxlength="200" required>
-            </label>
-          </div>
-          <label class="field">
-            <span>Assunto</span>
-            <select name="subject" required>
-              <option value="" disabled selected>Escolha o assunto</option>
-              ${(services || []).map((sv) => '<option value="' + esc(sv.name) + '">' + esc(sv.name) + '</option>').join('')}
-              <option value="Outro assunto">Outro assunto</option>
-            </select>
-          </label>
-          <label class="field">
-            <span>Mensagem</span>
-            <textarea name="message" rows="5" maxlength="8000" required></textarea>
-          </label>
-          <button class="btn btn-solid btn-lg" type="submit">Enviar mensagem <span class="arr">→</span></button>
-          <p class="form-note" id="formNote"></p>
-        </form>
       </div>
     </section>`;
   }
@@ -601,7 +575,7 @@
         ${aboutHTML(s)}
         ${skillsHTML(data)}
         ${servicesHTML(data)}
-        ${contactHTML(s, data.services)}
+        ${contactHTML(data, data.services)}
       </main>
       ${footerHTML(s.site, s.footer, data.socials, s.contact)}`;
   }

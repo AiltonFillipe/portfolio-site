@@ -380,6 +380,7 @@ p { margin: 0; }
 .contact { background: var(--ink); color: var(--paper); padding: clamp(64px, 10vw, 120px) 0; }
 .contact .eyebrow { color: color-mix(in srgb, var(--paper) 60%, transparent); }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 90px); }
+.contact .container > .contact-info { max-width: 680px; margin: 0 auto; }
 .contact-sub { color: color-mix(in srgb, var(--paper) 70%, transparent); margin: 22px 0 36px; font-size: 1.05rem; }
 .contact-lines { display: grid; gap: 16px; margin-bottom: 36px; }
 .contact-line { display: flex; align-items: center; gap: 14px; }
