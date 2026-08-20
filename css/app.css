@@ -386,13 +386,14 @@ p { margin: 0; }
 .contact-line { display: flex; align-items: center; gap: 14px; }
 .contact-ico { width: 40px; height: 40px; border-radius: 11px; background: color-mix(in srgb, var(--paper) 8%, transparent); display: flex; align-items: center; justify-content: center; flex: none; color: var(--accent); }
 .contact-line a:hover { color: var(--accent); }
-.contact-social { display: flex; flex-wrap: wrap; gap: 10px; }
+.contact-social { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
 .social-pill {
-  font-family: var(--font-mono); font-size: 0.74rem; font-weight: 600;
-  border: 1px solid color-mix(in srgb, var(--paper) 30%, transparent); border-radius: 999px; padding: 9px 16px;
+  display: block; text-align: center;
+  font-family: var(--font-mono); font-size: 0.76rem; font-weight: 600;
+  border: 1px solid color-mix(in srgb, var(--paper) 30%, transparent); border-radius: 999px; padding: 12px 16px;
   transition: all 0.25s var(--ease);
 }
-.social-pill:hover { background: var(--accent); color: var(--ink); border-color: var(--accent); }
+.social-pill:hover { background: var(--accent); color: var(--ink); border-color: var(--accent); transform: translateY(-2px); }
 
 .contact-form {
   background: var(--paper); color: var(--ink); border-radius: 24px;
