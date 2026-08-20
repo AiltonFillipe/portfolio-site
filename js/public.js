@@ -317,8 +317,18 @@
   }
 
   function skillsHTML(s) {
-    const skills = (s.skills || []).filter((k) => k.kind === 'skill');
-    const software = (s.skills || []).filter((k) => k.kind === 'software');
+    const all = (s.skills || []).slice();
+    const order = {};
+    const groups = [];
+    all.forEach((k) => {
+      let g = (k.grp || '').trim();
+      if (!g) g = k.kind === 'software' ? 'Softwares' : 'Habilidades';
+      if (!(g in order)) {
+        order[g] = groups.length;
+        groups.push({ name: g, items: [] });
+      }
+      groups[order[g]].items.push(k);
+    });
     return `
     <section class="skills" id="skills">
       <div class="container">
@@ -328,24 +338,18 @@
             <h2 class="section-title">Habilidades</h2>
           </div>
         </div>
-        <div class="skills-grid">
-          <div class="skill-bars">
-            ${skills.map((k, i) => `
-              <div class="skill-row reveal" style="transition-delay:${i * 40}ms">
-                <div class="skill-top"><span>${esc(k.name)}</span><span>${esc(k.level || 0)}%</span></div>
-                <div class="skill-bar"><div class="skill-fill" data-w="${Math.max(0, Math.min(100, k.level || 0))}"></div></div>
-              </div>`).join('')}
-          </div>
-          <div class="software-list reveal">
-            <p class="software-title">Softwares que eu uso</p>
-            <div class="software-chips">
-              ${software.map((s) => '<span class="chip">' + esc(s.name) + '</span>').join('')}
-            </div>
-            <div class="skills-note">
-              <span class="brand-mark">✦</span>
-              <p>Cada projeto é executado em processo aberto — estratégia primeiro, depois o ofício, e por fim a entrega pronta para o mundo.</p>
-            </div>
-          </div>
+        <div class="skills-groups">
+          ${groups.map((g, i) => `
+            <div class="skill-group reveal" style="transition-delay:${i * 60}ms">
+              <p class="software-title">${esc(g.name)}</p>
+              <div class="software-chips">
+                ${g.items.map((k) => '<span class="chip">' + esc(k.name) + '</span>').join('')}
+              </div>
+            </div>`).join('')}
+        </div>
+        <div class="skills-note reveal">
+          <span class="brand-mark">✦</span>
+          <p>Cada projeto é executado em processo aberto — estratégia primeiro, depois o ofício, e por fim a entrega pronta para o mundo.</p>
         </div>
       </div>
     </section>`;
@@ -555,7 +559,6 @@
       bindContact();
       updateFilterArrows();
       observeReveal();
-      runSkillBars();
       const raw = (location.hash || '#/').replace(/^#\/?/, '');
       if (['about', 'portfolio', 'skills', 'services', 'contact'].includes(raw)) {
         const el = document.getElementById(raw);
@@ -680,18 +683,6 @@
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     qsa('.reveal').forEach((n) => io.observe(n));
-  }
-
-  function runSkillBars() {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((en) => {
-        if (!en.isIntersecting) return;
-        const bar = en.target;
-        bar.style.width = bar.dataset.w + '%';
-        io.unobserve(bar);
-      });
-    }, { threshold: 0.3 });
-    qsa('.skill-fill').forEach((n) => io.observe(n));
   }
 
   /* ---------- public helpers used in inline handlers ---------- */
