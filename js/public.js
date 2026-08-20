@@ -393,27 +393,28 @@
         <div class="contact-info">
           <p class="eyebrow reveal">06 — Contato</p>
           <h2 class="section-title reveal">Vamos trabalhar juntos</h2>
-          <p class="contact-sub reveal">${esc(c.availability || '')}</p>
-          <div class="contact-lines reveal">
-            <div class="contact-line">
-              <span class="contact-ico">${window.S.icon('mail', 20)}</span>
-              <a href="mailto:${esc(c.email)}">${esc(c.email)}</a>
+          <div class="contact-card reveal">
+            <div class="contact-lines">
+              <div class="contact-line">
+                <span class="contact-ico">${window.S.icon('mail', 20)}</span>
+                <a href="mailto:${esc(c.email)}">${esc(c.email)}</a>
+              </div>
+              ${c.whatsapp ? `<div class="contact-line">
+                <span class="contact-ico">${window.S.icon('chat', 20)}</span>
+                <a href="https://wa.me/${esc(c.whatsapp)}" target="_blank" rel="noopener">WhatsApp</a>
+              </div>` : ''}
+              <div class="contact-line">
+                <span class="contact-ico">${window.S.icon('pin', 20)}</span>
+                <span>${esc(c.location || '')}</span>
+              </div>
+              <div class="contact-line">
+                <span class="contact-ico">${window.S.icon('clock', 20)}</span>
+                <span>${esc(c.availability || '')}</span>
+              </div>
             </div>
-            <div class="contact-line">
-              <span class="contact-ico">${window.S.icon('pin', 20)}</span>
-              <span>${esc(c.location || '')}</span>
+            <div class="contact-social">
+              ${(d.socials || []).map((so) => '<a class="social-pill" href="' + esc(so.url) + '" target="_blank" rel="noopener">' + esc(so.platform) + '</a>').join('')}
             </div>
-            <div class="contact-line">
-              <span class="contact-ico">${window.S.icon('clock', 20)}</span>
-              <span>${esc(c.availability || '')}</span>
-            </div>
-            ${c.whatsapp ? `<div class="contact-line">
-              <span class="contact-ico">${window.S.icon('chat', 20)}</span>
-              <a href="https://wa.me/${esc(c.whatsapp)}" target="_blank" rel="noopener">WhatsApp</a>
-            </div>` : ''}
-          </div>
-          <div class="contact-social reveal">
-            ${(d.socials || []).map((so) => '<a class="social-pill" href="' + esc(so.url) + '" target="_blank" rel="noopener">' + esc(so.platform) + '</a>').join('')}
           </div>
         </div>
       </div>
