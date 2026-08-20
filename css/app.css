@@ -384,7 +384,7 @@ p { margin: 0; }
 .contact-card {
   background: color-mix(in srgb, var(--paper) 4%, transparent);
   border: 1px solid color-mix(in srgb, var(--paper) 14%, transparent);
-  border-radius: 24px; padding: clamp(24px, 4vw, 40px);
+  border-radius: 24px; padding: clamp(24px, 4vw, 40px); margin-top: 34px;
 }
 .contact-lines { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 28px; padding-bottom: 26px; border-bottom: 1px solid color-mix(in srgb, var(--paper) 14%, transparent); margin-bottom: 24px; }
 .contact-line { display: flex; align-items: center; gap: 14px; min-width: 0; }
