@@ -310,7 +310,6 @@
           </div>
           <div class="about-cta reveal">
             <a class="btn btn-solid btn-lg" href="/uploads/curriculo-ailton-soares.pdf" download="Curriculo - Ailton Soares.pdf">Baixar currículo <span class="arr">↓</span></a>
-            <a class="btn btn-ghost btn-lg" href="#skills">Ver minhas habilidades <span class="arr">↓</span></a>
           </div>
         </div>
       </div>
