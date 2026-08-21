@@ -322,7 +322,7 @@ p { margin: 0; }
 .about-block-label { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
 .about-block p:not(.about-block-label) { color: color-mix(in srgb, var(--paper) 75%, transparent); font-size: 0.98rem; }
 .about-stats { display: flex; gap: clamp(20px, 4vw, 56px); border-top: 1px solid color-mix(in srgb, var(--paper) 18%, transparent); padding-top: 34px; flex-wrap: wrap; }
-.about-cta { margin-top: 28px; }
+.about-cta { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 14px; }
 .stat { display: flex; flex-direction: column; gap: 4px; }
 .stat-value { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--accent); }
 .stat-label { font-family: var(--font-mono); font-size: 0.72rem; color: color-mix(in srgb, var(--paper) 60%, transparent); letter-spacing: 0.08em; text-transform: uppercase; }
