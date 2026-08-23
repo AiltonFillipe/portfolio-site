@@ -153,13 +153,13 @@
   }
 
   function heroTitleHTML(title, highlight) {
-    if (!highlight) return esc(title || '');
+    if (!highlight) return esc(title || '').replace(/\n/g, '<br>');
     const idx = title.indexOf(highlight);
-    if (idx === -1) return esc(title || '');
-    const before = esc(title.slice(0, idx));
-    const hl = esc(highlight);
-    const after = esc(title.slice(idx + highlight.length));
-    return before + '<span class="hl">' + hl + '</span>' + after;
+    if (idx === -1) return esc(title || '').replace(/\n/g, '<br>');
+    const before = esc(title.slice(0, idx)).replace(/\n/g, '<br>');
+    const after = esc(title.slice(idx + highlight.length)).replace(/\n/g, '<br>');
+    const parts = highlight.split('\n').map((p) => '<span class="hl">' + esc(p) + '</span>').join('<br>');
+    return before + parts + after;
   }
 
   const marqueeItems = () => data.categories.map((c) => c.name);
