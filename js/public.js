@@ -68,9 +68,10 @@
         <a class="btn btn-ghost btn-sm" href="#portfolio">Ver Portfólio</a>
         <a class="btn btn-solid btn-sm" href="#contact">Fale Comigo</a>
       </div>
-      <button class="nav-toggle" aria-label="Menu" onclick="S.pub.toggleNav()">${window.S.icon('menu', 22)}</button>
+      <button class="nav-toggle" aria-label="Menu">${window.S.icon('menu', 22)}</button>
     </header>
     <div class="mobile-nav" id="mobileNav">
+      <button class="mobile-nav-close" aria-label="Fechar menu">${window.S.icon('x', 24)}</button>
       ${nav.map(([href, label]) => '<a href="' + href + '">' + label + '</a>').join('')}
       <div class="mobile-nav-actions">
         ${themeBtn()}
@@ -117,8 +118,13 @@
     const toggle = qs('.nav-toggle');
     const nav = qs('#mobileNav');
     if (toggle && nav) {
-      toggle.addEventListener('click', () => nav.classList.toggle('open'));
-      qsa('.mobile-nav a').forEach((a) => a.addEventListener('click', () => nav.classList.remove('open')));
+      const setOpen = (open) => {
+        nav.classList.toggle('open', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+      };
+      toggle.addEventListener('click', () => setOpen(!nav.classList.contains('open')));
+      qs('.mobile-nav-close').addEventListener('click', () => setOpen(false));
+      qsa('.mobile-nav a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
     }
   };
 

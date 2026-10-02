@@ -140,6 +140,12 @@ p { margin: 0; }
   background: var(--paper); padding: 100px 28px 40px; flex-direction: column; gap: 6px;
 }
 .mobile-nav.open { display: flex; }
+.mobile-nav-close {
+  position: absolute; top: 18px; right: 22px;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: 12px;
+  border: 1.5px solid var(--line-strong); background: transparent; color: var(--ink);
+}
 .mobile-nav a {
   font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; padding: 10px 0;
   border-bottom: 1px solid var(--line);
@@ -204,6 +210,7 @@ p { margin: 0; }
   background: var(--accent); color: var(--ink); overflow: hidden;
   border-top: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink);
   padding: 16px 0; transform: rotate(-1.2deg) scale(1.02); margin: 8px 0 14px;
+  width: 100%;
 }
 .marquee-track { display: flex; gap: 42px; white-space: nowrap; width: max-content; animation: scroll 32s linear infinite; animation-play-state: paused; }
 .marquee:hover .marquee-track { animation-play-state: running; }
@@ -863,4 +870,12 @@ html[data-theme="dark"] .field select { color-scheme: dark; }
   .stat-grid { grid-template-columns: repeat(2, 1fr); }
   .proj-row { flex-wrap: wrap; }
   .proj-row-toggles, .proj-row-actions { margin-left: auto; }
+  html, body { overflow-x: clip; }
+  .marquee { transform: rotate(-0.5deg) scale(1); margin: 6px 0 12px; }
+  .hero-title { font-size: clamp(1.7rem, 6.2vw, 2.1rem); }
+  .hero-cta .btn { flex: 1 1 100%; }
+  .contact-card { padding: 22px 18px; }
+  .detail-side { flex-direction: row; flex-wrap: wrap; gap: 12px; }
+  .site-header { padding: 14px 16px; }
+  .btn-lg { padding: 15px 26px; font-size: 0.85rem; }
 }
