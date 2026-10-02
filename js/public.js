@@ -118,9 +118,26 @@
     const toggle = qs('.nav-toggle');
     const nav = qs('#mobileNav');
     if (toggle && nav) {
+      let savedY = 0;
       const setOpen = (open) => {
         nav.classList.toggle('open', open);
-        document.body.style.overflow = open ? 'hidden' : '';
+        if (open) {
+          savedY = window.scrollY;
+          const body = document.body;
+          body.style.overflow = 'hidden';
+          body.style.position = 'fixed';
+          body.style.inset = '0 auto auto 0';
+          body.style.width = '100%';
+          body.style.top = -savedY + 'px';
+        } else {
+          const body = document.body;
+          body.style.overflow = '';
+          body.style.position = '';
+          body.style.inset = '';
+          body.style.width = '';
+          body.style.top = '';
+          window.scrollTo(0, savedY);
+        }
       };
       toggle.addEventListener('click', () => setOpen(!nav.classList.contains('open')));
       qs('.mobile-nav-close').addEventListener('click', () => setOpen(false));
